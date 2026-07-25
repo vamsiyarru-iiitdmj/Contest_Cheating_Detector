@@ -53,7 +53,7 @@ RISK_COLOR = {"low": "#1e7e34", "medium": "#b8860b", "high": "#c0392b"}
 
 FEATURE_DESCRIPTIONS = {
     "total_submissions": "Number of completed submissions in total",
-    "active_days": "Number of distinct calendar days with at least one submission",
+    "active_days_pct": "Percent of contest days with at least one submission",
     "submissions_per_day": "Average submissions per active day",
     "submission_avg_initial_days": "Average submissions/day in the first third of the contest",
     "avg_submissions_mid": "Average submissions/day in the middle third of the contest",
@@ -76,10 +76,10 @@ FEATURE_DESCRIPTIONS = {
     "submissions_post_jump": "Submissions after the largest single score jump",
     "leap_size": "Size of the largest single score jump",
     "post_jump_score_repetition": "How repetitive scores are after that jump (0-1)",
-    "quiz_participation": "Number of summer-training quizzes attended (0-10)",
+    "quiz_participation_pct": "Percent of summer-training quizzes attended",
     "final_rank": "Final leaderboard rank",
     "rank_to_submissions": "final_rank / total_submissions",
-    "rank_to_quiz_participation": "final_rank / (quiz_participation + 1)",
+    "rank_to_quiz_participation": "final_rank / (quiz_participation_pct/10 + 1)",
     "description_rate": "Fraction of submissions with a written description",
 }
 

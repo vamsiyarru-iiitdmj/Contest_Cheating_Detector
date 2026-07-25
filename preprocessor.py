@@ -67,14 +67,14 @@ import pandas as pd
 MAX_SUBMISSIONS_PER_DAY_TRAINING_ASSUMPTION = 10  # for reference only; real logs are used as-is, not capped
 
 FEATURE_COLUMN_ORDER = [
-    "total_submissions", "active_days", "submissions_per_day", "submission_avg_initial_days",
+    "total_submissions", "active_days_pct", "submissions_per_day", "submission_avg_initial_days",
     "avg_submissions_mid", "submissions_end",
     "median_score", "top_score", "lowest_score", "gap_median_top", "gap_lowest_top",
     "peak_submissions_per_day", "top_score_on_peak_day", "peak_submissions_per_hour", "top_score_on_peak_hour",
     "claude_min_score", "user_min_score_diff", "above_below_claude_min",
     "score_time_corr", "time_to_best_score_hours",
     "submissions_pre_jump", "submissions_post_jump", "leap_size", "post_jump_score_repetition",
-    "quiz_participation", "final_rank",
+    "quiz_participation_pct", "final_rank",
     "rank_to_submissions", "rank_to_quiz_participation",
     "description_rate",
 ]
@@ -200,6 +200,7 @@ def extract_features_from_log(
         )
 
     active_days = len(np.unique(days))
+    active_days_pct = round(active_days / comp_days * 100, 2)
 
     day_series = pd.Series(days)
     day_counts = day_series.value_counts()
@@ -244,6 +245,10 @@ def extract_features_from_log(
     jump_info = _analyze_jump(scores)
 
     submissions_per_day_rate = n_sub / active_days
+    # quiz_participation is entered as a raw count out of 10 (matching the training
+    # data's TOTAL_QUIZZES=10 convention) and converted to a percentage here, since
+    # that's what the model was actually trained on.
+    quiz_participation_pct = round(quiz_participation / 10 * 100, 2)
 
     desc_col = df["description"].astype(str)
     has_desc = desc_col.notna() & (desc_col.str.strip() != "") & (desc_col.str.lower() != "nan")
@@ -251,7 +256,7 @@ def extract_features_from_log(
 
     if final_rank is not None:
         rank_to_submissions = final_rank / n_sub
-        rank_to_quiz_participation = final_rank / (quiz_participation + 1)
+        rank_to_quiz_participation = final_rank / (quiz_participation_pct / 10 + 1)
     else:
         final_rank = np.nan
         rank_to_submissions = np.nan
@@ -268,7 +273,7 @@ def extract_features_from_log(
 
     feats = dict(
         total_submissions=n_sub,
-        active_days=active_days,
+        active_days_pct=active_days_pct,
         submissions_per_day=submissions_per_day_rate,
         submission_avg_initial_days=submission_avg_initial_days,
         avg_submissions_mid=avg_submissions_mid,
@@ -287,7 +292,7 @@ def extract_features_from_log(
         above_below_claude_min=above_below_claude_min,
         score_time_corr=score_time_corr,
         time_to_best_score_hours=time_to_best_score_hours,
-        quiz_participation=quiz_participation,
+        quiz_participation_pct=quiz_participation_pct,
         final_rank=final_rank,
         rank_to_submissions=rank_to_submissions,
         rank_to_quiz_participation=rank_to_quiz_participation,
