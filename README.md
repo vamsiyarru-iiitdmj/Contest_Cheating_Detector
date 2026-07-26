@@ -57,4 +57,9 @@ For the app to work and predict accurately , we need to provide the input in thi
 ## Application of the project:
 This project can be used to flag the cheaters , without cheaking their notebooks line to line. Even if someone checks all the notebooks , one can say that they had vibe coded instead of typing manually. This makes the notebook screening process , can be a waste of time and not productive at all. But , this project flags out the AI csv submitters, without checking their notebooks etc. It is designed to reduced  False Negatives, not leaving anyone if their submission history has suspectable patterns. These patterns are visually shown by the decision tree using dtreeviz, allowing the interviewers to ask the appropriate questions regarding the suspectable patterns.
 
+## Conclusion:
+
+This project started from a genuine desire for fairness, not just as a standard assignment. After watching impossible leaderboard jumps during a beginner hackathon, I wanted a real, programmatic solution to protect the integrity of our contests instead of just manually screening notebooks.
+Two months ago, I was just stepping into the world of machine learning, I don't even know about a single algorithm. By the end of this project, I had engineered a custom synthetic dataset, trained and tuned XGBoost and Decision Tree models using Optuna, and shipped a complete deployment using Streamlit and FastAPI.
+This project is a part of Summer of ML (SoML-2026), organized by the AI-ML wing of the Programming Club. I am incredibly grateful to all my seniors and mentors for their guidance and efforts over the past two months. This program gave me the tools and skills to turn a frustrating contest experience into my first end-to-end machine learning application, and I wouldn't have been able to build this without their support.
 
