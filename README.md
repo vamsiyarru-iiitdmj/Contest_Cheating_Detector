@@ -9,8 +9,32 @@ The competition ended. I was once in the 2nd place in the contest ended at the 2
 Then I realised that the AI csv submitters can be found using the rate of submissions, score improvements and other statistical features from just their submission history. This is the origin of my idea.
 ## Necessity:
 Summer of ML is a great initiative taken by our seniors to teach us ML. The regression based contest is our **first time participating in a kaggle contest**. Its a chance for us to show what we learnt in the summer. But, the AI csv submitters ruined that first contest. Doing submissions via AI in contest, and pushing back all the hard coders , hits the morale of the beginners. Leading to quitting the program, or making them cheat in the same way using AI in the next contests. This is a huge problem. There should be a way to flag who is cheating without actually the participants recognising. This is the main aim of my project.
-## Tech stack used:
 
+---
+
+## Tech Stack Used in the project
+
+| Component | Tech |
+|----------|------|
+| Programming Language | Python |
+| Data Handling | Pandas, NumPy |
+| Model Training | scikit-learn, XGBClassifier, DecisionTreeClassifier |
+| Frontend | Python |
+| API | Fast API |
+| Model Persistence | Pickle, Joblib |
+| Deployment | streamlit |
+
+---
+
+## Machine Learning Models Used
+
+- **Algorithm**: `XGBClassifier, DecisionTreeClassifier(for visualization purpose)`
+- **Tuned via**: `Optuna + stratifiedKFold + cross validation`
+- **Accuracy**: `0.86`
+- **macro f1 Score**: `0.819`
+- **visualization**: `dtreeviz + graphviz`
+
+## Workflow:
 
 
 
