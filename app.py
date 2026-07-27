@@ -71,6 +71,7 @@ with title_col:
 with about_col:
     with st.popover("About"):
         st.markdown(
+            "This app was buit to **detect cheating** and also the **type of person** he is.\n\n"
             "**Academic purpose.** Uses machine learning to analyze "
             "submission patterns for educational insight.\n\n"
             "Confidentially maintained."
@@ -83,7 +84,13 @@ with help_col:
             "contest details below, then click **Predict!**\n\n"
             "**Data requirements**\n\n"
             "The CSV needs at least a `date` and `publicScore` column, "
-            "exported directly from your submission history."
+            "exported directly from your submission history.\n\n"
+            "**Steps to get your submission history**\n\n"
+            "1) `pip install kaggle` in cmd"
+            "2) Get API from Kaggle (from settings -> Create API -> Copy the API token)\n\n"
+            "3) Now, paste the api token in cmd : `set` instead of `export` for  windows.\n\n"
+            "4) Finally, paste this command\n\n`kaggle competitions submissions -c summer-of-ml-26-regression-hacakthon -v > file_name.csv`\n\n"
+            "5) Your .csv file gets downloaded in your present working directory.\n\nSubmit Here To Predict."
         )
 
 st.divider()
@@ -97,7 +104,8 @@ with st.expander("📌 Note"):
         "quiz tracker respectively -- they aren't in your submission CSV, so please enter them "
         "accurately; they materially affect the prediction.\n"
         "- Contest timing (start date / duration) can be left at the defaults if you're not sure; "
-        "the app will fall back sensibly and tell you what it approximated."
+        "the app will fall back sensibly and tell you what it approximated.\n"
+        "- Predictions may not be correct all the times, so we also offer the explanation for the classification."
     )
 
 st.markdown("### Submitter Analysis Input")
@@ -217,7 +225,7 @@ if result:
             f"{dt_r['archetype']}</span>",
             unsafe_allow_html=True,
         )
-        st.caption("No probability here")
+        st.caption("Reason for the prediction is given below.")
 
     st.divider()
 
